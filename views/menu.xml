@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="EBS OCMA" id="ocma_root_menu" web_icon="ebs_ocma,static/src/img/icon.png"/>
+
+    <menuitem name="DISCOs " id="ocma_discos_menu" parent="ocma_root_menu"
+              sequence="2" />
+        <menuitem name="DISCOs" id="ocma_disco_menu" parent="ocma_discos_menu"
+              sequence="6" action="base.action_partner_customer_form"/>
+        <menuitem name="DISCO Invoicing" id="disco_invoicing_menu" parent="ocma_discos_menu"
+              sequence="7" action="account.action_invoice_tree1"/>
+
+
+    </data>
+</odoo>
