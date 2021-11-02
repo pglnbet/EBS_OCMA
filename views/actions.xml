@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="action_billing_circle">
+        <field name="name">Billing Circle</field>
+        <field name="res_model">billing.circle</field>
+        <field name="view_mode">tree,kanban,form,pivot</field>
+    </record>
+
+
+    </data>
+</odoo>

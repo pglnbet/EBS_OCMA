@@ -4,12 +4,14 @@
         <menuitem name="EBS OCMA" id="ocma_root_menu" web_icon="ebs_ocma,static/src/img/icon.png"/>
 
     <menuitem name="DISCOs " id="ocma_discos_menu" parent="ocma_root_menu"
-              sequence="2" />
+              sequence="3" />
         <menuitem name="DISCOs" id="ocma_disco_menu" parent="ocma_discos_menu"
               sequence="6" action="base.action_partner_customer_form"/>
         <menuitem name="DISCO Invoicing" id="disco_invoicing_menu" parent="ocma_discos_menu"
               sequence="7" action="account.action_invoice_tree1"/>
-
+    <menuitem name="Billing Circles " id="ocma_circles_menu" parent="ocma_root_menu"
+              sequence="2" />
+        <menuitem name="Billing Circle" id="circle_billing_menu" parent="ocma_circles_menu" sequence="1" action="action_billing_circle"/>
 
     </data>
 </odoo>
