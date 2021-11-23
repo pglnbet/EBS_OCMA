@@ -5,6 +5,7 @@ from odoo import models, fields, api
 class BillingCircle(models.Model):
     _name = 'billing.circle'
     _description = 'BillingCircle'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Billing Circle', compute="billing_circle")
     month = fields.Selection(selection=[('JAN', 'January'), ('FEB', 'February'), ('MAR', 'March'), ('APR', 'April'),
@@ -47,16 +48,16 @@ class BillingCircle(models.Model):
     #     required=False)
     cbn_average = fields.Float(
         string='Cbn_average', 
-        required=False)
+        required=False, track_visibility=True, trace_visibility='onchange')
     nbet_dist_rate = fields.Float(
         string='Nbet_dist_rate', 
-        required=False)
+        required=False, track_visibility=True, trace_visibility='onchange')
     nbet_dist_azura = fields.Float(
         string='Nbet_dist_azura', 
-        required=False)
+        required=False, track_visibility=True, trace_visibility='onchange')
     additional_notes = fields.Text(
         string="Additional_notes",
-        required=False)
+        required=False, track_visibility=True, trace_visibility='onchange')
 
     @api.multi
     @api.depends('')
@@ -82,34 +83,34 @@ class GencoVerify(models.Model):
     name = fields.Char()
     genco_id = fields.Many2one(
         comodel_name='res.partner',
-        string='Genco_id',
+        string='Genco',
         required=False)
     capacity_payment = fields.Float(
-        string='Capacity_payment', 
+        string='Capacity Payments',
         required=False)
     energy_payment = fields.Float(
-        string='Energy_payment', 
+        string='Energy payments',
         required=False)
     startup_payment = fields.Float(
-        string='Startup_payment', 
+        string='Startup Payments',
         required=False)
     interest_payment = fields.Float(
-        string='Interest_payment', 
+        string='Interest Payments',
         required=False)
     total_payment = fields.Float(
-        string='Total_payment', 
+        string='Total Payments',
         required=False)
     nbet_computed = fields.Float(
-        string='Nbet_computed', 
+        string='Nbet computed figures',
         required=False)
     date_received = fields.Date(
-        string='Date_received', 
+        string='Date received',
         required=False)
     due_date = fields.Date(
-        string='Due_date', 
+        string='Due date',
         required=False)
     cus_invoice_ref = fields.Char(
-        string='Cus_invoice_ref', 
+        string='Customer invoice ref',
         required=False)
     billing_circle_id = fields.Many2one(
         comodel_name='billing.circle',
