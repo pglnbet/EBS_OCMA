@@ -2,11 +2,25 @@
 <odoo>
     <data>
         <record model="ir.actions.act_window" id="action_billing_circle">
-        <field name="name">Billing Circle</field>
-        <field name="res_model">billing.circle</field>
-        <field name="view_mode">tree,kanban,form,pivot</field>
-    </record>
+            <field name="name">Billing Circle</field>
+            <field name="res_model">billing.circle</field>
+            <field name="view_mode">tree,kanban,form,pivot</field>
+        </record>
 
+        <record id="action_genco_customer_form" model="ir.actions.act_window">
+            <field name="name">Gencos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_genco','=',True)]</field>
+            <field name="context">{'default_is_genco': True, 'default_is_company': True}</field>
+            <field name="filter" eval="True"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new customer in your address book
+              </p>
+            </field>
+        </record>
 
     </data>
 </odoo>
