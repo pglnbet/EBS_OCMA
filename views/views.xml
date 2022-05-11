@@ -56,6 +56,21 @@
                         <page string="GENCOs Payments">
 
                         </page>
+                        <page name="genco_parameters" string="Genco Parameters">
+                                <group>
+                                    <field nolabel="1" name="genco_parameters_ids" context="{'default_billing_cycle_id': active_id}">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="partner_id"/>
+                                            <field name="capacity_sent_out"/>
+                                            <field name="energy_sent_out"/>
+                                            <field name="energy_import" />
+                                            <field name="invoiced_capacity"/>
+                                            <field name="invoiced_energy"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

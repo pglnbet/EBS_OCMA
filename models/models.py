@@ -68,7 +68,8 @@ class BillingCircle(models.Model):
     agip_quaterly_index = fields.Float(string="Agip Quaterly Index")
     azura_fx_date = fields.Float(string="Azura FX Date")
     azura_fx_value = fields.Float(string="Azura FX Value")
-    user_id = fields.Many2one(comodel_name='res.users', string='Responsible User', default=lambda self: self.env.uid)
+    user_id = fields.Many2one(comodel_name='res.users', string='Responsible User.', default=lambda self: self.env.uid)
+    genco_parameters_ids = fields.One2many(comodel_name="genco.parameters", inverse_name="billing_cycle_id", string="Genco Parameters")
 
     @api.model
     def create(self, vals):
@@ -208,6 +209,20 @@ class DiscoSummary(models.Model):
         string='Billing Circle',
         required=False)
 
+class GencoParaemeter(models.Model):
+    _name = 'genco.parameters'
+    _description = 'Genco Parameters'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    name = fields.Char(string="Name")
+    billing_cycle_id = fields.Many2one(comodel_name='billing.circle', string='Billing Cycle')
+    partner_id = fields.Many2one(comodel_name='res.partner', string='Genco')
+    
+    capacity_sent_out = fields.Float(string='Capacity Sent Out')
+    energy_sent_out = fields.Float(string='Energy Sent Out')
+    energy_import = fields.Float(string='Energy Import')
+    invoiced_capacity = fields.Float(string='Invoiced Capacity')
+    invoiced_energy = fields.Float(string='Invoiced Energy')
 
 
 
