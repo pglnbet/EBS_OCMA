@@ -3,3 +3,4 @@ access_ocma,ocma.billing,model_billing_circle,,1,1,1,0
 access_ocma2,ocma.billing2,model_genco_verify,,1,1,1,0
 access_ocma3,ocma.billing3,model_genco_verify_dollars,,1,1,1,0
 access_ocma4,ocma.billing4,model_disco_summary,,1,1,1,0
+access_genco_parameters,genco.parameters,model_genco_parameters,,1,1,1,0

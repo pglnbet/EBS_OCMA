@@ -7,6 +7,8 @@ class BillingCircle(models.Model):
     _description = 'BillingCircle'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    title = fields.Char(string='Title')
+
     name = fields.Char(string='Billing Circle', compute="billing_circle")
     month = fields.Selection(selection=[('JAN', 'January'), ('FEB', 'February'), ('MAR', 'March'), ('APR', 'April'),
                                         ('MAY', 'May'), ('JUN', 'June'), ('JUL', 'July'), ('AUG', 'August'),
@@ -20,6 +22,8 @@ class BillingCircle(models.Model):
     ref_no = fields.Char(
         string='Reference Number', 
         required=False)
+    
+    ref_sequence = fields.Char(string='Sequence No.', readonly=True, index=True, copy=False, default='New')
     
     genco_inv_verify = fields.One2many(
         comodel_name='genco.verify',
@@ -58,6 +62,20 @@ class BillingCircle(models.Model):
     additional_notes = fields.Text(
         string="Additional_notes",
         required=False, track_visibility=True, trace_visibility='onchange')
+
+    hours_in_months = fields.Float(string='Hours in Month')
+    transmission_loss_factor = fields.Float(string="Transmission Loss Factor")
+    agip_quaterly_index = fields.Float(string="Agip Quaterly Index")
+    azura_fx_date = fields.Float(string="Azura FX Date")
+    azura_fx_value = fields.Float(string="Azura FX Value")
+    user_id = fields.Many2one(comodel_name='res.users', string='Responsible User.', default=lambda self: self.env.uid)
+    genco_parameters_ids = fields.One2many(comodel_name="genco.parameters", inverse_name="billing_cycle_id", string="Genco Parameters")
+
+    @api.model
+    def create(self, vals):
+        if vals.get('ref_sequence', 'New') == 'New':
+            vals['ref_sequence'] = self.env['ir.sequence'].next_by_code('billing.circle') or '/'
+        return super(BillingCircle, self).create(vals)
 
     @api.multi
     @api.depends('')
@@ -191,6 +209,20 @@ class DiscoSummary(models.Model):
         string='Billing Circle',
         required=False)
 
+class GencoParaemeter(models.Model):
+    _name = 'genco.parameters'
+    _description = 'Genco Parameters'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    name = fields.Char(string="Name")
+    billing_cycle_id = fields.Many2one(comodel_name='billing.circle', string='Billing Cycle')
+    partner_id = fields.Many2one(comodel_name='res.partner', string='Genco')
+    
+    capacity_sent_out = fields.Float(string='Capacity Sent Out')
+    energy_sent_out = fields.Float(string='Energy Sent Out')
+    energy_import = fields.Float(string='Energy Import')
+    invoiced_capacity = fields.Float(string='Invoiced Capacity')
+    invoiced_energy = fields.Float(string='Invoiced Energy')
 
 
 
