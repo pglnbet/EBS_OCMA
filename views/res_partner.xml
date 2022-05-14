@@ -8,10 +8,10 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='accounting']" position="inside">
                     <group>
-                        <field name="is_disco"/>
-                        <field name="is_genco"/>
-                        <field name="vesting_contract"/>
-                        <field name="contract_capacity_share" attrs="{'required': [('is_disco','=',True)]}"/>
+<!--                        <field name="is_disco"/>-->
+<!--                        <field name="is_genco"/>-->
+<!--                        <field name="vesting_contract"/>-->
+<!--                        <field name="contract_capacity_share" attrs="{'required': [('is_disco','=',True)]}"/>-->
                     </group>
                 </xpath>
             </field>
